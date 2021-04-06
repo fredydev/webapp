@@ -19,6 +19,7 @@ pipeline {
         //sh 'docker run gesellix/trufflehog --json https://github.com/fredydev/webapp.git > trufflehog'
         //sh 'cat trufflehog'
         sh 'git clone https://github.com/fredydev/webapp.git'
+        sh 'cd webapp'
         sh 'git secrets --register-aws'
         sh 'git secrets --scan'
         sh '''
