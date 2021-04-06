@@ -15,9 +15,17 @@ pipeline {
 
     stage ('Check-Git-Secrets') {
       steps {
-        sh 'rm trufflehog || true'
-        sh 'docker run gesellix/trufflehog --json https://github.com/fredydev/webapp.git > trufflehog'
-        sh 'cat trufflehog'
+        //sh 'rm trufflehog || true'
+        //sh 'docker run gesellix/trufflehog --json https://github.com/fredydev/webapp.git > trufflehog'
+        //sh 'cat trufflehog'
+        sh 'git clone https://github.com/fredydev/webapp.git'
+        sh 'git secrets --register-aws'
+        sh 'git secrets --scan'
+        sh '''
+              if  [ $? -eq 0 ]; then
+                  echo "git secrets --scan OK"
+              else
+                  echo "git secrets --scan FAIL"
       }
     }
 
