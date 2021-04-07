@@ -27,6 +27,7 @@ pipeline {
                   echo "git secrets --scan OK"
               else
                   echo "git secrets --scan FAIL"
+	   '''
       }
     }
 
